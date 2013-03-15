@@ -1,12 +1,11 @@
-cfs-auto-complete
-=================
+# cfs-auto-complete
 
 Adds an Auto Complete field type to Custom Field Suite.
 
-== Known issue ==
+## Known issues
 * Can't be used inside a "Loop" Field
 
-== Changelog ==
+## Changelog
 
-= 1.0.0 =
+### 1.0.0
 * Initial commit
