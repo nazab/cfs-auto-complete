@@ -11,11 +11,12 @@ class cfs_auto_complete extends cfs_field
 
     function html($field)
     {
+        $field->id = $this->get_option($field, 'id');
     ?>
         <script>
         (function($) {
             $(function() {
-                $('#cfs_auto_complete_<?php echo $field->id;?>').autocomplete(
+                $('.cfs_auto_complete_<?php echo $field->id;?>').autocomplete(
                 {
                     source: ajaxurl+'?action=cfs_auto_complete_<?php echo $field->id?>'
                 }
@@ -23,7 +24,7 @@ class cfs_auto_complete extends cfs_field
             });
         })(jQuery);
         </script>
-        <input type="text" placeholder="Auto complete" id="cfs_auto_complete_<?php echo $field->id;?>" name="<?php echo $field->input_name; ?>" class="<?php echo $field->input_class; ?>" value="<?php echo $field->value; ?>"/>
+        <input type="text" placeholder="Auto complete" name="<?php echo $field->input_name; ?>" class="<?php echo $field->input_class; ?> cfs_auto_complete_<?php echo $field->id;?>" value="<?php echo $field->value; ?>"/>
     <?php    
     }
 
@@ -32,6 +33,7 @@ class cfs_auto_complete extends cfs_field
     ?>
          <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
          <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+         
           
     <?php
     }
@@ -40,7 +42,8 @@ class cfs_auto_complete extends cfs_field
 ?>
         <tr class="field_option field_option_<?php echo $this->name; ?>">
             <td class="label" colspan="2">
-<?php if(isset($field->id)) { ?>
+<?php if(isset($field->id)) { 
+    $field->options['id'] = $field->id; ?>
 <pre>
 add_action('wp_ajax_cfs_auto_complete_<?php echo $field->id;?>', 'cfs_auto_complete_<?php echo $field->id;?>');
 
@@ -54,8 +57,15 @@ function cfs_auto_complete_<?php echo $field->id;?>() {
     die(); // this is required to return a proper result
 }
 </pre>
-<?php } else { echo 'Save the fields group to get the PHP code template.'; } ?></td>
+<?php } else { echo 'Save the fields group to get the PHP code template.';} ?></td>
         </tr>
         <?php
+        echo '<div style="display:none">';
+        $this->parent->create_field(array(
+                        'type' => 'text',
+                        'input_name' => "cfs[fields][$key][options][id]",
+                        'value' => $this->get_option($field, 'id'),
+                    ));
+        echo '</div>';
     }   
 }

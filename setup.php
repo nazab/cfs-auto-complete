@@ -3,7 +3,7 @@
 Plugin Name: CFS - Auto Complete field  Add-on
 Plugin URI: https://uproot.us/
 Description: Adds an Auto Complete field type.
-Version: 1.0.0
+Version: 1.1.0
 Author: Bejamin AZAN
 Author URI: http://benjaminazan.com/
 License: GPL2
