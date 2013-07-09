@@ -30,12 +30,8 @@ class cfs_auto_complete extends cfs_field
 
     function input_head()
     {
-    ?>
-         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-         
-          
-    <?php
+        wp_enqueue_script('jquery-ui-core');
+        wp_enqueue_script('jquery-ui-autocomplete');
     }
     
     function options_html($key, $field) {
